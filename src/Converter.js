@@ -3,11 +3,18 @@ import { json, checkStatus } from "./utils";
 import {
   EuiFieldNumber,
   EuiForm,
+  EuiFlexGroup,
+  EuiFlexItem,
   EuiI18n,
   EuiSelect,
   EuiTextColor,
+  EuiSpacer,
+  EuiCard,
+  EuiIcon,
 } from "@elastic/eui";
 import "@elastic/eui/dist/eui_theme_light.css";
+
+import money from "./logo.svg";
 
 class Converter extends React.Component {
   state = {
@@ -57,6 +64,14 @@ class Converter extends React.Component {
     this.convert(this.state.base, this.state.startAmount, event.target.value);
   };
 
+  getAmountWithCurrencySymbol(amount, symbol) {
+    return amount.toLocaleString(undefined, {
+      style: "currency",
+      currency: symbol,
+      maximumFractionDigits: 2,
+    });
+  }
+
   componentDidMount() {
     this.convert(this.state.base);
   }
@@ -104,31 +119,61 @@ class Converter extends React.Component {
 
     return (
       <div>
+        <EuiSpacer size="xxl" />
+
         <EuiForm>
-          <EuiSelect
-            prepend="Convert from: "
-            id="currencyBase"
-            options={options}
-            onChange={this.handleChangeBase}
-            aria-label="Currency Type"
-            value={this.state.base}
-          ></EuiSelect>
-          <EuiFieldNumber
-            step="any"
-            prepend="$"
-            value={this.state.startAmount}
-            onChange={this.handleChangeStartAmount}
-          ></EuiFieldNumber>
-          <EuiSelect
-            prepend="Convert to: "
-            id="convertTo"
-            options={options}
-            onChange={this.handleChangeConvertTo}
-            aria-label="Currency Type"
-            value={this.state.convertTo}
-          ></EuiSelect>
+          <EuiFlexGroup wrap>
+            <EuiFlexItem style={{ minWidth: 300 }}>
+              <EuiSelect
+                prepend="Convert from: "
+                id="currencyBase"
+                options={options}
+                onChange={this.handleChangeBase}
+                aria-label="Currency Type"
+                value={this.state.base}
+              ></EuiSelect>
+            </EuiFlexItem>
+            <EuiSpacer size="l" />
+            <EuiFlexItem style={{ minWidth: 300 }}>
+              <EuiSelect
+                prepend="Convert to: "
+                id="convertTo"
+                options={options}
+                onChange={this.handleChangeConvertTo}
+                aria-label="Currency Type"
+                value={this.state.convertTo}
+              ></EuiSelect>
+            </EuiFlexItem>
+            <EuiFlexItem style={{ minWidth: 300 }}>
+              <EuiFieldNumber
+                step="any"
+                prepend="$"
+                value={this.state.startAmount}
+                onChange={this.handleChangeStartAmount}
+              ></EuiFieldNumber>
+            </EuiFlexItem>
+            <EuiSpacer size="l" />
+          </EuiFlexGroup>
         </EuiForm>
-        <p>${this.state.convertedAmount.toFixed(2)}</p>
+        <EuiSpacer size="l" />
+        <EuiFlexGroup justifyContent="spaceAround">
+          <EuiFlexItem grow={true} style={{ maxWidth: 500 }}>
+            <EuiCard
+              icon={<EuiIcon size="xxl" type={money} />}
+              title={
+                <p>
+                  {this.getAmountWithCurrencySymbol(
+                    this.state.convertedAmount,
+                    this.state.convertTo
+                  )}
+                </p>
+              }
+              description=""
+              display="panel"
+              padding="l"
+            />
+          </EuiFlexItem>
+        </EuiFlexGroup>
       </div>
     );
   }

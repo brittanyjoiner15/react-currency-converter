@@ -1,6 +1,13 @@
 import React from "react";
 import { json, checkStatus } from "./utils";
-import { EuiBasicTable, EuiSelect, EuiSpacer } from "@elastic/eui";
+import {
+  EuiBasicTable,
+  EuiSelect,
+  EuiSpacer,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiText,
+} from "@elastic/eui";
 import "@elastic/eui/dist/eui_theme_light.css";
 
 class Table extends React.Component {
@@ -45,10 +52,12 @@ class Table extends React.Component {
       {
         field: "countrycode",
         name: "Currency Code",
+        align: "center",
       },
       {
         field: "rate",
         name: "Rate",
+        align: "center",
       },
     ];
 
@@ -97,19 +106,31 @@ class Table extends React.Component {
 
     return (
       <div>
-        <EuiSelect
-          id="currencyBase"
-          options={options}
-          onChange={this.handleChange}
-          aria-label="Currency Type"
-          value={this.state.base}
-        />
+        <EuiSpacer size="xxl" />
+        <EuiFlexGroup justifyContent="spaceAround">
+          <EuiFlexItem grow={false} style={{ minWidth: 300 }}>
+            <EuiText color="secondary">
+              Select the base currency to view real time conversion rates.
+            </EuiText>
+            <EuiSelect
+              id="currencyBase"
+              options={options}
+              onChange={this.handleChange}
+              aria-label="Currency Type"
+              value={this.state.base}
+            />
+          </EuiFlexItem>
+        </EuiFlexGroup>
         <EuiSpacer></EuiSpacer>
-        <EuiBasicTable
-          items={items}
-          columns={columns}
-          state={this.state.rates}
-        />
+        <EuiFlexGroup>
+          <EuiFlexItem style={{ minWidth: 300 }}>
+            <EuiBasicTable
+              items={items}
+              columns={columns}
+              state={this.state.rates}
+            />
+          </EuiFlexItem>
+        </EuiFlexGroup>
       </div>
     );
   }
