@@ -1,25 +1,24 @@
-import React from "react";
-import logo from "./logo.svg";
-import Table from "./Table";
-import Converter from "./Converter";
-import Navbar from "./Nav";
-import "./App.css";
 import "@elastic/eui/dist/eui_theme_light.css";
-
-import { EuiSpacer, EuiFlexGroup, EuiFlexItem, EuiText } from "@elastic/eui";
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import "./App.css";
+import Converter from "./Converter";
+import Home from "./Home";
+import Navbar from "./Nav";
+import Footer from "./Footer";
+import Table from "./Table";
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <EuiFlexGroup>
-        <EuiFlexItem>
-          <EuiText>
-            <h1>Welcome to my currency converter.</h1>
-          </EuiText>
-        </EuiFlexItem>
-      </EuiFlexGroup>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Footer />
+        <Route path="/" exact component={Home} />
+        <Route path="/converter/" component={Converter} />
+        <Route path="/table/" component={Table} />
+      </div>
+    </Router>
   );
 }
 
