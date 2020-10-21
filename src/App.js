@@ -1,22 +1,14 @@
 import React from "react";
 import logo from "./logo.svg";
+import Table from "./Table";
+import Converter from "./Converter";
 import "./App.css";
+import "@elastic/eui/dist/eui_theme_light.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hi i am britt</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Converter />
     </div>
   );
 }
