@@ -21,7 +21,7 @@ class Footer extends React.Component {
     return (
       <div>
         <EuiBottomBar>
-          <EuiFlexGroup justifyContent="spaceEvenly">
+          <EuiFlexGroup>
             <EuiFlexItem>
               <EuiHeaderLogo type="logoElastic">
                 <EuiText color="ghost">Made with EUI</EuiText>

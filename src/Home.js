@@ -18,7 +18,7 @@ function Home() {
       <EuiFlexGroup>
         <EuiFlexItem>
           <EuiText>
-            <h1>Welcome to my currency converter.</h1>
+            <h1>Welcome to my currency converter</h1>
           </EuiText>
         </EuiFlexItem>
       </EuiFlexGroup>

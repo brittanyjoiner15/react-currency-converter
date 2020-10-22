@@ -5,7 +5,6 @@ import "./App.css";
 import Converter from "./Converter";
 import Home from "./Home";
 import Navbar from "./Nav";
-import Footer from "./Footer";
 import Table from "./Table";
 
 function App() {
@@ -13,7 +12,6 @@ function App() {
     <Router>
       <div className="App">
         <Navbar />
-        <Footer />
         <Route path="/" exact component={Home} />
         <Route path="/converter/" component={Converter} />
         <Route path="/table/" component={Table} />
